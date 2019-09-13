@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using WebApiCoreCustomerProject.Models;
 
 namespace WebApiCoreCustomerProject {
     public class Startup {
@@ -20,6 +22,12 @@ namespace WebApiCoreCustomerProject {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
+            var connStr = @"server=localhost\sqlexpress;database=CustDb;trusted_connection=true;";
+
+            services.AddDbContext<CustDbContext>(option => {
+                option.UseLazyLoadingProxies();
+                option.UseSqlServer(connStr);
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
