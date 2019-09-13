@@ -10,8 +10,8 @@ using WebApiCoreCustomerProject.Models;
 namespace WebApiCoreCustomerProject.Migrations
 {
     [DbContext(typeof(CustDbContext))]
-    [Migration("20190913175849_AddedOrderClass")]
-    partial class AddedOrderClass
+    [Migration("20190913191320_Initialize")]
+    partial class Initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,6 +38,33 @@ namespace WebApiCoreCustomerProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("WebApiCoreCustomerProject.Models.Employee", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Firstname")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Lastname")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(25);
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasMaxLength(25);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("WebApiCoreCustomerProject.Models.Order", b =>
