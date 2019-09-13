@@ -9,6 +9,7 @@ namespace WebApiCoreCustomerProject.Models {
     public class CustDbContext: DbContext {
 
         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
 
         public CustDbContext(DbContextOptions<CustDbContext> context) : base(context) {
 
